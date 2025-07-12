@@ -6,9 +6,11 @@ import {
   Int,
   Parent,
   ResolveField,
+  Mutation,
 } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { UserSetting } from './models/UserSetting';
+import { CreateUserInput } from './utils/create-user.input';
 
 @Resolver((of) => User)
 export class UserResolver {
@@ -27,5 +29,10 @@ export class UserResolver {
   getUserSettings(@Parent() user: User) {
     console.log(user);
     return this.userService.getUserSettings(user.id);
+  }
+
+  @Mutation(() => User)
+  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
+    return this.userService.createUser(createUserInput);
   }
 }
