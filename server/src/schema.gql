@@ -2,13 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CreateUserInput {
-  displayName: String
-  username: String!
+type UserSetting {
+  userId: Int!
+  receiveNotification: Boolean!
+  receiveEmails: Boolean!
 }
 
-type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
+type User {
+  id: Int!
+  username: String!
+  displayName: String
+  setting: UserSetting
 }
 
 type Query {
@@ -16,15 +20,16 @@ type Query {
   getUsers: [User!]!
 }
 
-type User {
-  displayName: String
-  id: Int!
-  setting: UserSetting
-  username: String!
+type Mutation {
+  sendMessage(message: String!): String!
+  createUser(createUserInput: CreateUserInput!): User!
 }
 
-type UserSetting {
-  receiveEmails: Boolean!
-  receiveNotification: Boolean!
-  userId: Int!
+input CreateUserInput {
+  username: String!
+  displayName: String
+}
+
+type Subscription {
+  messageSent: String!
 }
