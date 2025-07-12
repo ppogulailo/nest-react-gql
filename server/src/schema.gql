@@ -3,11 +3,19 @@
 # ------------------------------------------------------
 
 type Query {
-  getUser: User!
+  getUser(id: Int!): User!
+  getUsers: [User!]!
 }
 
 type User {
   displayName: String
   id: Int!
+  setting: UserSetting
   username: String!
+}
+
+type UserSetting {
+  receiveEmails: Boolean!
+  receiveNotification: Boolean!
+  userId: Int!
 }
